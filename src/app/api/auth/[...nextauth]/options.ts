@@ -22,7 +22,6 @@ export const authOptions: NextAuthOptions = {
               { username: credentials.identifier },
             ],
           });
-
           if (!user) throw new Error("User not found with this email");
 
           if (!user.isVerified)
@@ -46,7 +45,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token._id = user?._id?.toString();
         token.isVerified = user.isVerified;
-        token.isAcceptingMessage = user.isAcceptingMessages;
+        token.isAcceptingMessage = user.isAcceptingMessage;
         token.username = user.username;
       }
       return token;
@@ -61,11 +60,11 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  pages: {
-    signIn: "/sign-in",
-  },
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRETE,
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/sign-in",
+  },
 };
