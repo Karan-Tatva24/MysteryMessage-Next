@@ -108,10 +108,10 @@ const Dashboard = () => {
     }
   };
 
-  // const { username } = session?.user as User;
+  const { username } = session?.user as User;
 
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/u/${session?.user.username}`;
+  const profileUrl = `${baseUrl}/u/${username}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
@@ -177,7 +177,7 @@ const Dashboard = () => {
         {messages.length > 0 ? (
           messages.map((message, index) => (
             <MessageCard
-              key={index}
+              key={message._id as string}
               message={message}
               onMessageDelete={handleDeleteMessage}
             />
